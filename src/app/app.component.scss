@@ -5,11 +5,33 @@
   mat-sidenav-container{
     height: calc(100vh - 65px);
   }
-  .example-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #eee;
+
+  mat-sidenav{
+    margin: 16px;
+    width: 200px;
+    text-align: center;
+
+  }
+
+  mat-sidenav-content{
+    padding:1rem;
+  }
+
+  .avatar{
+    margin-top:16px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+
+  }
+
+  .name {
+    margin-top: 8px;
+    font-weight: 100;
+  }
+
+  .designation{
+    margin-top: 8px;
+    font-size: 0.7rem;
+
   }
