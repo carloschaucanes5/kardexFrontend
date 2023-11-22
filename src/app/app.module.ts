@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './library/material/material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {HttpClientModule } from '@angular/common/http';
-
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +20,7 @@ import {HttpClientModule } from '@angular/common/http';
     NgbModule,
     MaterialModule,
     HttpClientModule,
+    SharedModule
 
   ],
   providers: [],

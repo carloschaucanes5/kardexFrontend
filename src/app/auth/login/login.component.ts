@@ -3,6 +3,7 @@ import {FormsModule} from '@angular/forms';
 import { NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Auth } from 'src/app/models/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,17 +13,20 @@ import { Auth } from 'src/app/models/auth';
 export class LoginComponent implements OnInit {
     identification:any = "";
     password:any = "";
-constructor(public authService:AuthService){}
+constructor(
+  private authService:AuthService,
+  private router:Router
+  ){}
 
-ngOnInit(): void {
-    
-}
+ngOnInit(): void {}
 
 login(){
   let auth:any = {email:this.identification,password:this.password}
-  this.authService.login(auth).subscribe(data=>console.log(data));
-  
+  this.authService.login(auth).subscribe(data=>{
+    console.log(data);
+    if(data.code == 200){
+      this.router?.navigate(['main']);
+    }
+  });
 }
-
-
 }
