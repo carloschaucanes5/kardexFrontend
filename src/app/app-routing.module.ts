@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { MainComponent } from './shared/main/main.component';
+import { AuthService } from './auth/auth.service';
+import { authGuard } from './auth/auth.guard';
+import { PrincipalComponent } from './shared/principal/principal.component';
+
 const routes: Routes = [
   {
     path:'', redirectTo:'auth', pathMatch:'full'
@@ -12,7 +15,13 @@ const routes: Routes = [
   },
   {
     path:'main',
-    component:MainComponent
+    component:PrincipalComponent,
+    providers:[AuthService],
+    canActivate:[authGuard]
+  },
+  {
+    path:"**",
+    loadComponent:()=>import('./page-not-found/page-not-found.component').then(comp=>comp.PageNotFoundComponent)
   }
 ];
 
