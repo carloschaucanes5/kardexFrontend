@@ -7,6 +7,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSidenavModule,
     MatFormFieldModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }

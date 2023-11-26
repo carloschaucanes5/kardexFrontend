@@ -1,3 +1,21 @@
 <mat-toolbar color="primary">
-  <span>My App</span>
+  <div class="container-header">
+    <div class="container-header-title">
+      <div class="container-header-icono">
+        <img class="avatar " src="https://www.comparasoftware.co/wp-content/uploads/2019/11/logokardextauro-150x150.png"/>
+      </div>
+      <div class="container-header-text">
+        <span>SISTEMA ADMINISTRATIVO DE VENTAS SAV</span></div>
+      </div>
+    <div class="container-header-menu-user">
+      
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
+        {{fullName}}</button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item>Información</button>
+        <button mat-menu-item (click)="closeSession()">Salir</button>
+        </mat-menu>
+    </div>
+  </div>
 </mat-toolbar>

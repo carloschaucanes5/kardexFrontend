@@ -4,14 +4,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from '../library/material/material.module';
-import { MainComponent } from './main/main.component';
+import { PrincipalComponent } from './principal/principal.component';
+
 
 @NgModule({
   declarations: [
     NavigationComponent,
     FooterComponent,
     HeaderComponent,
-    MainComponent
+    PrincipalComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +22,7 @@ import { MainComponent } from './main/main.component';
     NavigationComponent,
     FooterComponent,
     HeaderComponent,
-    MainComponent
+    PrincipalComponent
   ]
 })
 export class SharedModule { }

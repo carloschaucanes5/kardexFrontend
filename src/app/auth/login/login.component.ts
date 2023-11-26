@@ -25,7 +25,11 @@ login(){
   this.authService.login(auth).subscribe(data=>{
     console.log(data);
     if(data.code == 200){
-      this.router?.navigate(['main']);
+      localStorage.setItem("user",JSON.stringify(data.response.user));
+      localStorage.setItem("token",data.response.token);
+      this.router?.navigate(['main']).then(()=>{
+        window.location.reload();
+      });
     }
   });
 }

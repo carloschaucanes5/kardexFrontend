@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable,throwError } from 'rxjs';
+import { Observable,of,throwError } from 'rxjs';
 import { catchError,retry } from 'rxjs';
 import { Response } from '../models/response';
 import { Auth } from '../models/auth';
@@ -16,6 +16,26 @@ export class AuthService {
   //methods
   login(dataUser:Observable<any>){
     return this.http.post<Response>(this.urlApi,dataUser,this.createHeaders());
+  }
+
+  loginIn():Observable<boolean>{
+    return of(!!localStorage.getItem('token'));
+  }
+
+  getDataUser(){
+    return localStorage.getItem("user");
+  }
+
+  getToken(){
+    return localStorage.getItem("token");
+  }
+
+  deleteDataUser(){
+    localStorage.removeItem("user");
+  }
+
+  deleteDataToken(){
+    localStorage.removeItem("token");
   }
 
   createHeaders(){

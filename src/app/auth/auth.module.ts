@@ -24,7 +24,8 @@ import { AuthService } from './auth.service';
   ],
   exports:[
     LoginComponent,
-    ForgetComponent
+    ForgetComponent,
+    LoginComponent,
   ]
 })
 export class AuthModule { }

@@ -1,3 +1,25 @@
-<img class="avatar mat-elevation-z8" src="https://www.comparasoftware.co/wp-content/uploads/2019/11/logokardextauro-150x150.png"/>
-<h4 class="name">Carlos Chaucanes</h4>
-<p class="designation">Ingeniero de sistemas</p>
+<button  class="button-navegation" [matMenuTriggerFor]="user">
+  <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
+  <p>Usuarios</p>
+</button>
+<mat-menu  #user="matMenu">
+  <button  mat-menu-item >Registro Usuario</button>
+  <button mat-menu-item >Listado Usuarios</button>
+</mat-menu>
+<button  class="button-navegation" [matMenuTriggerFor]="inventory">
+  <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  <p>Inventario</p>
+</button>
+<mat-menu  #inventory="matMenu">
+  <button mat-menu-item >Registro Productos</button>
+  <button mat-menu-item >Movimientos</button>
+  <button mat-menu-item >Reportes</button>
+</mat-menu>
+<button  class="button-navegation" [matMenuTriggerFor]="sales">
+  <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="information"></mat-icon>
+  <p>Ventas</p>
+<mat-menu #sales="matMenu">
+  <button mat-menu-item >Nueva venta</button>
+  <button mat-menu-item >Devoluciones</button>
+  <button mat-menu-item >Reportes</button>
+</mat-menu>
