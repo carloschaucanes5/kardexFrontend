@@ -1,38 +1,38 @@
 import { Component, ViewChild,OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { LoginComponent } from './auth/login/login.component';
+import  {General as GG}  from './config/general';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-
-
 })
 export class AppComponent implements OnInit {
-  @ViewChild(LoginComponent) loginChild:any;
   events: string[] = [];
-  opened?: boolean;
-
-  shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(window.location.host);
-
-  constructor(private authService:AuthService){}
-  session = true;
-  showNavigation:boolean = false;
+  opened?: boolean=true;
+  authenticated:boolean = false;
  
+  constructor(private authService:AuthService){}
+  
   ngOnInit(): void {
       this.verifyLogin();
   }
 
-
   verifyLogin(){
     this.authService.loginIn().subscribe(logged=>{
+      let url:any = window.document.URL;
+      url = url.split(GG.URL)[1];
       if(logged){
-        this.showNavigation = true;
+        if(url == GG.URLAUTH || url == GG.URLBEGIN){
+          this.authenticated = false;
+        }
+        else{
+          this.authenticated = true;
+        }
       }
       else
       {
-        this.showNavigation = false;
+        this.authenticated = false;
       }
     })
   }

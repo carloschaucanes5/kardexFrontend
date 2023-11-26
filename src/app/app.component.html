@@ -1,31 +1,20 @@
-<!--app-header ></app-header>
-<mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened >
-    <app-navigation></app-navigation>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container-->
-
-@if (shouldRun) {
+<section *ngIf="authenticated==true">
+  <app-header ></app-header>
+  <div class="others">
+    <button mat-button (click)="sidenav.toggle()" *ngIf="opened==false"><mat-icon>exit_to_app</mat-icon></button>
+    <button mat-button (click)="sidenav.toggle()" *ngIf="opened==true"><mat-icon>assignment_return</mat-icon></button>
+  </div>
   <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
-                (closed)="events.push('close!')">
-      Sidenav content
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+      <app-navigation></app-navigation>
     </mat-sidenav>
-
     <mat-sidenav-content>
-      <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-      <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-      <p>Events:</p>
-      <div class="example-events">
-
-      </div>
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
-} @else {
-  <div>Please open on Stackblitz to see result</div>
-}
+</section>
+<section *ngIf="authenticated==false">
+  <router-outlet></router-outlet>
+</section>
 
 
