@@ -20,6 +20,10 @@ const routes: Routes = [
     canActivate:[authGuard]
   },
   {
+    path:'user',
+    loadChildren:()=>import('./user/user.module').then(m=>m.UserModule)
+  },
+  {
     path:"**",
     loadComponent:()=>import('./page-not-found/page-not-found.component').then(comp=>comp.PageNotFoundComponent)
   }

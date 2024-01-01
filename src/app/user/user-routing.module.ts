@@ -6,10 +6,16 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 
 
-export const userRoutes:Routes = [
+const routes:Routes = [
   {path:"",redirectTo:"user-create", pathMatch:"full"},
   {path:"user-create",component:UserCreateComponent},
   {path:"user-list",component:UserListComponent},
   {path:"user-edit",component:UserEditComponent},
 ];
 
+@NgModule({
+  imports:[RouterModule.forChild(routes)],
+  exports:[RouterModule]
+})
+
+export class UserRoutingModule{}

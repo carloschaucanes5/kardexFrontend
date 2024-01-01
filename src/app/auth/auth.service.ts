@@ -10,7 +10,7 @@ import { Auth } from '../models/auth';
 })
 export class AuthService {
 
-  private urlApi = "/kardex/login";
+  private urlApi = "/kardexAPI/login";
   constructor(private http:HttpClient) { }
 
   //methods

@@ -3,8 +3,8 @@
   <p>Usuarios</p>
 </button>
 <mat-menu  #user="matMenu">
-  <button  mat-menu-item >Registro Usuario</button>
-  <button mat-menu-item >Listado Usuarios</button>
+  <button  mat-menu-item (click)="navigateUrlMenu('user/user-create')" >Registro Usuario</button>
+  <button mat-menu-item (click)="navigateUrlMenu('user/user-list')">Listado Usuarios</button>
 </mat-menu>
 <button  class="button-navegation" [matMenuTriggerFor]="inventory">
   <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description"></mat-icon>
