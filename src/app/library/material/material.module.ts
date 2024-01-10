@@ -8,6 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatMenuModule} from '@angular/material/menu';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 
 
@@ -15,6 +16,15 @@ import {MatMenuModule} from '@angular/material/menu';
   declarations: [],
   imports: [
     CommonModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatMenuModule
   ],
   exports:[
     MatInputModule,

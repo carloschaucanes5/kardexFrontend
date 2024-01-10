@@ -1,1 +1,117 @@
-<p>user-create works!</p>
+<div class="container-create-user">
+  <h3 class="title">CREAR USUARIO</h3>
+  <form [formGroup]="createUserForm"  (ngSubmit)="submit()">
+    <div class="container-controlstwo">
+      <div class="container-control">
+        <label>Tipo Documento</label>
+        <select  type="text" formControlName="typeidentification"  >
+          <option value="{{type.id}}" *ngFor="let type of typesIdentification">{{type.description}}</option>
+        </select>
+        <span *ngIf="this.createUserForm.get('typeidentification')?.errors?.['required']">
+          la Identificacion no puede quedar vacia 
+        </span>
+        <span *ngIf="this.createUserForm.get('identification')?.errors?.['maxlength']">
+          la Identificacion debe de contener maximo 15 caracteres
+        </span>
+      </div>
+      <div class="container-control">
+        <label>Identificación</label>
+        <input  type="text" formControlName="identification"  required >
+        <span *ngIf="this.createUserForm.get('identification')?.errors?.['required']">
+          la Identificacion no puede quedar vacia 
+        </span>
+        <span *ngIf="this.createUserForm.get('identification')?.errors?.['maxlength']">
+          la Identificacion debe de contener maximo 15 caracteres
+        </span>
+      </div>
+    </div>
+    <div class="container-controlstwo">
+      <div class="container-control">
+        <label>Primer nombre</label>
+        <input type="text" formControlName="firts_name"  required >
+        <span *ngIf="this.createUserForm.get('firts_name')?.errors?.['required']">
+          El primer nombre no puede quedar vacia 
+        </span>
+        <span *ngIf="this.createUserForm.get('firts_name')?.errors?.['maxlength']">
+          la Identificacion debe de contener maximo 50 caracteres
+        </span>
+      </div>
+      <div class="container-control">
+        <label>Segundo nombre</label>
+        <input matInput type="text" formControlName="second_name">
+        <span *ngIf="this.createUserForm.get('second_name')?.errors?.['maxlength']">
+          El segundo nombre debe contener máximo 15 caracteres
+        </span>
+      </div>
+    </div>
+    <div class="container-controlstwo">
+      <div class="container-control">
+        <label>Primer Apellido</label>
+        <input type="text" formControlName="first_lastname"  required >
+        <span *ngIf="this.createUserForm.get('first_lastname')?.errors?.['required']">
+          El primer apellido no debe ser vacío
+        </span>
+        <span *ngIf="this.createUserForm.get('first_lastname')?.errors?.['maxlength']">
+          El primer apellido  debe de contener maximo 50 caracteres
+        </span>
+      </div>
+      <div class="container-control">
+        <label>Segundo apellido</label>
+        <input type="text" formControlName="second_lastname">
+        <span *ngIf="this.createUserForm.get('second_lastname')?.errors?.['maxlength']">
+          El segundo apellido debe contener máximo 15 caracteres
+        </span>
+      </div>
+    </div>
+    <div class="container-controlstwo">
+      <div class="container-control">
+        <label>Correo electrónico</label>
+        <input type="text" formControlName="email">
+        <span *ngIf="this.createUserForm.get('email')?.errors?.['maxlength']">
+          El email es incorrecto
+        </span>
+      </div>
+      <div class="container-control">
+        <label>Teléfono</label>
+        <input  type="text" formControlName="phone">
+        <span *ngIf="this.createUserForm.get('phone')?.errors?.['maxlength']">
+          El número telefónico no debe superar mas de 15 caracteres
+        </span>
+      </div>
+    </div>
+
+    <div class="container-controlsone">
+      <div class="container-control2">
+        <label>Dirección</label>
+        <input type="text" formControlName="address">
+        <span *ngIf="this.createUserForm.get('address')?.errors?.['maxlength']">
+          La dirección no debe superar mas de 60 caracteres
+        </span>
+      </div>
+    </div>
+    <div class="container-controlstwo">
+      <div class="container-control">
+        <label>Password</label>
+        <input type="text" formControlName="password">
+        <span *ngIf="this.createUserForm.get('password')?.errors?.['maxlength']">
+          La contraseña de usuario no debe superar mas de 20 caracteres
+        </span>
+      </div>
+      <div class="container-control">
+        <label>Confirmar password</label>
+        <input type="text" formControlName="confirm">
+        <span *ngIf="this.createUserForm.get('confirm')?.errors?.['maxlength']">
+          La confirmación no debe superar mas de 20 caracteres
+        </span>
+      </div>
+    </div>
+    <div class="container-controlsone">
+      <div class="container-button">
+        <button type="submit">Guardar</button>
+      </div>
+      
+    </div>
+   
+  </form>
+  {{resultado}}
+</div>
