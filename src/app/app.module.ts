@@ -6,9 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './library/material/material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import {HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
-
+import { AuthServiceInterceptorService} from './handlers/auth-service-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,13 @@ import { SharedModule } from './shared/shared.module';
     SharedModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthServiceInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

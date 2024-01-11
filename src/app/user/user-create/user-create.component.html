@@ -4,8 +4,9 @@
     <div class="container-controlstwo">
       <div class="container-control">
         <label>Tipo Documento</label>
-        <select  type="text" formControlName="typeidentification"  >
-          <option value="{{type.id}}" *ngFor="let type of typesIdentification">{{type.description}}</option>
+        <select  type="text" formControlName="idt">
+          <option value="">Seleccionar</option>
+          <option [value]="type.idt" *ngFor="let type of typesIdentification">{{type.description}}</option>
         </select>
         <span *ngIf="this.createUserForm.get('typeidentification')?.errors?.['required']">
           la Identificacion no puede quedar vacia 
@@ -28,11 +29,11 @@
     <div class="container-controlstwo">
       <div class="container-control">
         <label>Primer nombre</label>
-        <input type="text" formControlName="firts_name"  required >
-        <span *ngIf="this.createUserForm.get('firts_name')?.errors?.['required']">
+        <input type="text" formControlName="first_name"  required >
+        <span *ngIf="this.createUserForm.get('first_name')?.errors?.['required']">
           El primer nombre no puede quedar vacia 
         </span>
-        <span *ngIf="this.createUserForm.get('firts_name')?.errors?.['maxlength']">
+        <span *ngIf="this.createUserForm.get('first_name')?.errors?.['maxlength']">
           la Identificacion debe de contener maximo 50 caracteres
         </span>
       </div>

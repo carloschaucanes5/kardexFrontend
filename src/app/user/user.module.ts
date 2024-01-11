@@ -6,7 +6,6 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserRoutingModule } from './user-routing.module';
 import { MaterialModule } from '../library/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [
     UserCreateComponent,
@@ -24,5 +23,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserListComponent,
     UserEditComponent
   ]
+
 })
 export class UserModule { }

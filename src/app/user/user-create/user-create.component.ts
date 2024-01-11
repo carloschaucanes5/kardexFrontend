@@ -4,10 +4,12 @@ import { UserService } from '../user.service';
 import { Response } from '../../models/response';
 
 interface TypeIdentification{
-  id:string;
+  idt:string;
   description:string;
   state:string;
 };
+
+
 
 @Component({
   selector: 'app-user-create',
@@ -20,9 +22,9 @@ export class UserCreateComponent implements OnInit{
      typesIdentification:TypeIdentification[]=[];
      resultado?:string;
      createUserForm = new FormGroup({
-      typeidentification:new FormControl('',[Validators.required]),
+      idt:new FormControl('',[Validators.required]),
       identification:new FormControl('',[Validators.required,Validators.maxLength(15)]),
-      firts_name:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+      first_name:new FormControl('',[Validators.required,Validators.maxLength(50)]),
       second_name:new FormControl('',[Validators.maxLength(15)]),
       first_lastname:new FormControl('',[Validators.required,Validators.maxLength(50)]),
       second_lastname:new FormControl('',[Validators.required,Validators.maxLength(50)]),
@@ -31,6 +33,8 @@ export class UserCreateComponent implements OnInit{
       phone:new FormControl('',[Validators.maxLength(15)]),
       password: new FormControl('',[Validators.required,Validators.maxLength(20)]),
       confirm:new FormControl('',[Validators.required,Validators.maxLength(20)]),
+      status:new FormControl('a'),
+      id_role:new FormControl('1')
   })
 
    constructor(private service:UserService){
@@ -43,12 +47,21 @@ export class UserCreateComponent implements OnInit{
       
   }
 
+
+  onSectionChange(value:any){
+    console.log(value);
+    //this.createUserForm.controls['typeidentification'].setValue(value);
+  }
   submit(){
     if(!this.createUserForm.valid){
+      console.log(this.createUserForm.value);
       this.resultado = "El formulario es incorrecto";
     }
     else{
-      this.resultado = "El formulario es correcto";
+     this.service.saveUser(this.createUserForm.value).subscribe(res=>{
+      this.resultado = res.response.message;
+      console.log(res);
+     });
     }
   }
 }
