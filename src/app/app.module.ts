@@ -9,6 +9,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AuthServiceInterceptorService} from './handlers/auth-service-interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -22,8 +24,9 @@ import { AuthServiceInterceptorService} from './handlers/auth-service-intercepto
     NgbModule,
     MaterialModule,
     HttpClientModule,
-    SharedModule
-
+    SharedModule,
+    ToastrModule.forRoot(),
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }) 
   ],
   providers: [
     {

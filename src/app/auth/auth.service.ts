@@ -1,25 +1,32 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable,of,throwError } from 'rxjs';
+import { Observable,map,mergeMap,of,tap,throwError } from 'rxjs';
 import { catchError,retry } from 'rxjs';
 import { Response } from '../models/response';
 import { Auth } from '../models/auth';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private urlApi = "/kardexAPI/login";
-  constructor(private http:HttpClient) { }
+  private urlApi = "/kardexAPI/";
+  constructor(private http:HttpClient, private route:Router) { }
 
   //methods
   login(dataUser:Observable<any>){
-    return this.http.post<Response>(this.urlApi,dataUser,this.createHeaders());
+    return this.http.post<Response>(this.urlApi+"login",dataUser);
   }
 
   loginIn():Observable<boolean>{
     return of(!!localStorage.getItem('token'));
+  }
+
+  revalidateToken():Observable<boolean>{
+     return this.http.post<any>(this.urlApi+"revalidateToken",null)
+    .pipe(
+      map(res=>res.code==200?true:false)
+    );
   }
 
   getDataUser(){
@@ -38,15 +45,12 @@ export class AuthService {
     localStorage.removeItem("token");
   }
 
-  createHeaders(){
-    return {
-      headers:new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Headers':'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
-        'Access-Control-Allow-Methods':'GET, POST, OPTIONS, PUT, DELETE',
-        'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
-      })
-    }
+  closeSession(){
+    this.deleteDataUser();
+    this.deleteDataToken();
+    this.route.navigate(['auth']).then(()=>{
+      window.location.reload();
+    });
   }
 
 }

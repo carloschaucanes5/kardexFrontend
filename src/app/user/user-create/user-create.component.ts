@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { UserService } from '../user.service';
-import { Response } from '../../models/response';
-
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { UserConfig as UC } from '../user-config';
+import { tap } from 'rxjs';
 interface TypeIdentification{
   idt:string;
   description:string;
@@ -37,7 +39,10 @@ export class UserCreateComponent implements OnInit{
       id_role:new FormControl('1')
   })
 
-   constructor(private service:UserService){
+   constructor(
+      private service:UserService,
+      private toast:ToastrService,
+      private spinner:NgxSpinnerService){
 
    }
   ngOnInit(): void {
@@ -47,20 +52,27 @@ export class UserCreateComponent implements OnInit{
       
   }
 
-
   onSectionChange(value:any){
     console.log(value);
-    //this.createUserForm.controls['typeidentification'].setValue(value);
   }
   submit(){
     if(!this.createUserForm.valid){
-      console.log(this.createUserForm.value);
-      this.resultado = "El formulario es incorrecto";
+      this.toast.warning("Error en la operación", "formulario invalido");
     }
     else{
      this.service.saveUser(this.createUserForm.value).subscribe(res=>{
-      this.resultado = res.response.message;
-      console.log(res);
+      console.log(JSON.stringify(res));
+      if(res.code == UC.C200){
+        this.toast.success(res.message,UC.SUCCESSOPERATION);
+      }
+      else if(res.code >=UC.C400 && res.code <=UC.C499)
+      {
+        this.toast.warning(res.message,UC.WARNINGOPERATION);
+      }
+      else
+      {
+        this.toast.error(res.message,UC.ERROROPERATION);
+      }
      });
     }
   }

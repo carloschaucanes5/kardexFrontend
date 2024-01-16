@@ -15,7 +15,7 @@ export class UserService {
   }
   //guardar un usuario en la base de datos
   saveUser(user:any):Observable<any>{
-    return this.http.post(this.urlApi + "saveUser",user);
+    return this.http.post<Response>(this.urlApi + "saveUser",user);
   }
 
   
