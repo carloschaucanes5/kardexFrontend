@@ -12,6 +12,7 @@ import { AuthServiceInterceptorService} from './handlers/auth-service-intercepto
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+
 @NgModule({
   declarations: [
     AppComponent,

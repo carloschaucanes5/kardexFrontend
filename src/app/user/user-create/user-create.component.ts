@@ -16,19 +16,17 @@ interface TypeIdentification{
   templateUrl: './user-create.component.html',
   styleUrls: ['./user-create.component.scss']
 })
-
-
 export class UserCreateComponent implements OnInit{
      stateValidate:boolean = false;
      typesIdentification:TypeIdentification[]=[];
      resultado?:string;
      createUserForm = new FormGroup({
       idt:new FormControl('',[Validators.required]),
-      identification:new FormControl('',[Validators.required,Validators.maxLength(15),CustumeValidators.validatorNumericField]),
-      first_name:new FormControl('',[Validators.required,Validators.maxLength(50),CustumeValidators.validatorOnlyLetter]),
+      identification:new FormControl('',[Validators.maxLength(15),CustumeValidators.validatorNumericField]),
+      first_name:new FormControl('',[Validators.maxLength(50),CustumeValidators.validatorOnlyLetter]),
       second_name:new FormControl('',[Validators.maxLength(15),CustumeValidators.validatorOnlyLetter]),
-      first_lastname:new FormControl('',[Validators.required,Validators.maxLength(50),CustumeValidators.validatorOnlyLetter]),
-      second_lastname:new FormControl('',[Validators.required,Validators.maxLength(50),CustumeValidators.validatorOnlyLetter]),
+      first_lastname:new FormControl('',[Validators.maxLength(50),CustumeValidators.validatorOnlyLetter]),
+      second_lastname:new FormControl('',[Validators.maxLength(50),CustumeValidators.validatorOnlyLetter]),
       email:new FormControl('',[Validators.email]),
       address:new FormControl('',[Validators.maxLength(60)]),
       phone:new FormControl('',[Validators.maxLength(15),CustumeValidators.validatorNumericField]),
@@ -37,7 +35,6 @@ export class UserCreateComponent implements OnInit{
       status:new FormControl('a'),
       id_role:new FormControl('1')
   })
-
    constructor(
       private service:UserService,
       private toast:ToastrService,
@@ -47,21 +44,11 @@ export class UserCreateComponent implements OnInit{
   ngOnInit(): void {
       this.service.getTypesIdentification().subscribe(lis=>{
         this.typesIdentification = lis.response;
-      })
-      
-  }
-
-  onSectionChange(value:any){
-    console.log(value);
+      })  
   }
   submit(){
     this.stateValidate = true;
-    
-    /*
-    if(!this.createUserForm.valid){
-      this.toast.warning("Error en la operación", "formulario invalido");
-    }
-    else{
+    if(this.createUserForm.valid){
      this.service.saveUser(this.createUserForm.value).subscribe(res=>{
       console.log(JSON.stringify(res));
       if(res.code == UC.C200){
@@ -76,7 +63,7 @@ export class UserCreateComponent implements OnInit{
         this.toast.error(res.message,UC.ERROROPERATION);
       }
      });
-    }*/
+    }
   }
 }
 
