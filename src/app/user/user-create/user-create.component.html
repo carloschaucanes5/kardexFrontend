@@ -1,9 +1,11 @@
   <h3 class="title">CREAR USUARIO</h3>
   <hr/>
-  <form [formGroup]="createUserForm"  (ngSubmit)="submit()">
+  <!--form [formGroup]="createUserForm" (ngSubmit)="submit()"-->
+  <form [formGroup]="createUserForm" (ngSubmit)="saveUser()" >
     <div class="row g-3">
+
       <div class="col-md-4">
-        <label>Tipo Documento</label>
+        <label><b class="mandatory">*</b>Tipo Documento</label>
         <select class="form-control" type="text" formControlName="idt" >
           <option [value]="type.idt" *ngFor="let type of typesIdentification">{{type.description}}</option>
         </select>
@@ -12,7 +14,7 @@
         </small>
      </div>
      <div class="col-md-4">
-      <label for="identification">Identificación</label>
+      <label for="identification"><b class="mandatory">*</b>Identificación</label>
       <input class="form-control" type="text" formControlName="identification"   id="identification">
       <small *ngIf="stateValidate && this.createUserForm.get('identification')?.errors?.['maxlength']">
         la Identificacion debe de contener maximo 15 caracteres
@@ -24,7 +26,7 @@
     </div>
     <div class="row g-3">
       <div class="col-md-4">
-        <label>Primer nombre</label>
+        <label><b class="mandatory">*</b>Primer nombre</label>
         <input class="form-control" type="text" formControlName="first_name" >
         <small *ngIf="stateValidate && this.createUserForm.get('first_name')?.errors?.['maxlength']">
           la Identificacion debe de contener maximo 50 caracteres
@@ -46,7 +48,7 @@
       </div>
       <div class="row g-3">
         <div class="col-md-4">
-          <label>Primer Apellido</label>
+          <label><b class="mandatory">*</b>Primer Apellido</label>
           <input class="form-control" type="text" formControlName="first_lastname"  required >
           <small *ngIf="stateValidate && this.createUserForm.get('first_lastname')?.errors?.['maxlength']">
             El primer apellido  debe de contener maximo 50 caracteres
@@ -68,14 +70,17 @@
     </div>
     <div class="row g-3">
       <div class="col-md-4">
-        <label>Correo electrónico</label>
-        <input class="form-control" type="text" formControlName="email">
+        <label><b class="mandatory">*</b>Correo electrónico</label>
+        <input class="form-control" type="text" formControlName="email" required>
+        <small *ngIf="stateValidate && this.createUserForm.get('email')?.errors?.['required']">
+          El email es obligatorio
+        </small>
         <small *ngIf="stateValidate && this.createUserForm.get('email')?.errors?.['email']">
           El email es incorrecto
         </small>
       </div>
       <div class="col-md-4">
-        <label>Teléfono</label>
+        <label><b class="mandatory">*</b>Teléfono</label>
         <input class="form-control" type="text" formControlName="phone">
         <small *ngIf="stateValidate && this.createUserForm.get('phone')?.errors?.['maxlength']">
           El número telefónico no debe superar mas de 15 caracteres
@@ -94,7 +99,7 @@
     </div>
     <div class="row g-3">
       <div class="col-md-4">
-        <label>Password</label>
+        <label><b class="mandatory">*</b>Password</label>
         <input class="form-control" type="password" formControlName="password">
         <small *ngIf="stateValidate && this.createUserForm.get('password')?.errors?.['maxlength']">
           La contraseña de usuario no debe superar mas de 20 caracteres
@@ -104,13 +109,20 @@
         </small>
       </div>
       <div class="col-md-4">
-        <label>Confirmar password</label>
+        <label><b class="mandatory">*</b>Confirmar</label>
         <input class="form-control" type="password" formControlName="confirm">
-        <small *ngIf="stateValidate &&  this.createUserForm.get('confirm')?.errors?.['maxlength']">
-          La confirmación no debe superar mas de 20 caracteres
+        <small *ngIf="stateValidate &&  this.createUserForm.get('confirm')?.errors?.['required']">
+          Este campo es requerido
+        </small>
+        <small *ngIf="stateValidate &&  this.createUserForm.get('confirm')?.errors?.['validateComparePassword']">
+          La contraseñas no coinciden
         </small>
       </div>
     </div>
     <hr/>
-    <button class="btn btn-primary" type="submit">Guardar</button>
+    <div class="col g-3">
+      <button class="btn btn-primary"  type="submit">Guardar</button>
+      <button class="btn btn-danger" type="button" (click)="cleanForm()">limpiar</button>
+    </div>
+    <br>
 </form>

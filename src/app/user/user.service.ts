@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Response } from '../models/response';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +18,15 @@ export class UserService {
   saveUser(user:any):Observable<any>{
     return this.http.post<Response>(this.urlApi + "saveUser",user);
   }
-
+ //encrypt password
+ async encryptPassword(password:string){
+  let a = "";
+   await this.http.post<any>(this.urlApi + "encryptText",{"secretWord":password} ).pipe(
+    map(res=>res.response)
+  ).subscribe(res=>{
+    a = res.response
+  })
+  console.log(a);
+ }
   
 }

@@ -5,12 +5,15 @@ export class UserConfig {
     static C400 = 400;
     static C499 = 499;
     static C200SAVEUSER="El usuario se ha almacenado con éxito";
-    static C401INVALIDDATA="Datos invalidos por el usuario";
+    static C401INVALIDDATA="Datos invalidos";
     static C501ERRORSERVER="Error en el servidor";
     static MODULOUSER = "USUARIO";
     static SUCCESSOPERATION = "OPERACIÓN EXITOSA";
     static WARNINGOPERATION = "ADVERTENCIA";
     static ERROROPERATION = "ERROR";
+    static statusUserDafault = 'a';
+    static roleUserDefault = 1; 
+    static passwordNotEquals = "Las contraseñas no coinciden";
 
 
     
