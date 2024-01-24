@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserConfig as UC } from '../user-config';
 import { CustumeValidators } from 'src/app/utils/CustomeValidators';
+import { NgxSpinnerService } from "ngx-spinner";
 interface TypeIdentification{
   idt:string;
   description:string;
@@ -34,7 +35,8 @@ export class UserCreateComponent implements OnInit{
   })
    constructor(
       private service:UserService,
-      private toast:ToastrService){
+      private toast:ToastrService,
+      public spinner:NgxSpinnerService ){
    }
   ngOnInit(): void {
       this.service.getTypesIdentification().subscribe(lis=>{
@@ -44,6 +46,7 @@ export class UserCreateComponent implements OnInit{
     saveUser(){
     this.stateValidate = true;
     if(this.createUserForm.valid){
+      this.spinner.show();
       if(this.validateComparePassword(this.createUserForm.controls.password.value+"")){
         const obj:any = this.createUserForm.value;
          obj.status = UC.statusUserDafault;
@@ -52,6 +55,7 @@ export class UserCreateComponent implements OnInit{
           if(res.code == UC.C200){
             this.toast.success(res.message,UC.SUCCESSOPERATION);
             this.cleanForm();
+            this.spinner.hide();
             this.stateValidate = false;
           }else if(res.code >=UC.C400 && res.code <=UC.C499){
             this.toast.warning(res.message,UC.WARNINGOPERATION);
