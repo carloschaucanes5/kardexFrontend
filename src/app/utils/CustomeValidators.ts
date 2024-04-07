@@ -20,7 +20,7 @@ export class CustumeValidators {
     static validatorOnlyLetterAndSpace(control:AbstractControl):ValidationErrors| null{
         var data:string = control.value;
         if(data){
-            var valid = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]\s*$/.test(data);
+            var valid = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*\s*$/.test(data);
             if(valid){
                 return null;
             }

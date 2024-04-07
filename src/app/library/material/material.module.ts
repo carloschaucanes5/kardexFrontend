@@ -9,7 +9,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatMenuModule} from '@angular/material/menu';
 import {ErrorStateMatcher} from '@angular/material/core';
-
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import {ErrorStateMatcher} from '@angular/material/core';
     MatFormFieldModule,
     FormsModule,
     MatFormFieldModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule
   ],
   exports:[
     MatInputModule,
@@ -35,7 +36,8 @@ import {ErrorStateMatcher} from '@angular/material/core';
     MatFormFieldModule,
     FormsModule,
     MatFormFieldModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }

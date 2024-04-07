@@ -1,1 +1,27 @@
-<p>user-list works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="identification">
+    <th mat-header-cell *matHeaderCellDef> Ideintificacion </th>
+    <td mat-cell *matCellDef="let element"> {{element.identification}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Dirección </th>
+    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+  </ng-container>
+
+ 
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+    <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+</table>

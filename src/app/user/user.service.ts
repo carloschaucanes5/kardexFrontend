@@ -26,7 +26,10 @@ export class UserService {
   ).subscribe(res=>{
     a = res.response
   })
-  console.log(a);
+ }
+ //listar usuarios
+ listUser():Observable<Response>{
+    return this.http.get<Response>(this.urlApi + "listUser")
  }
   
 }
