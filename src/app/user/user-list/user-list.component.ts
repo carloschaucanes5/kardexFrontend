@@ -1,5 +1,5 @@
 
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit ,ViewChild} from '@angular/core';
 import { UserService } from '../user.service';
 import { map } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,28 +13,33 @@ import { MatTableDataSource } from '@angular/material/table';
   phone:string;
 };
 
+
+const DATA:User[]=[];
+
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public datasource = new MatTableDataSource();
+  public datasource = new MatTableDataSource<User>([]);
+  
+  
   public pageSizeOptions:number[] =[5,10,25,50];
   public currentPage = 1;
   public pageSize=10;
   public totalItems = 10;
-
-
-
-
   public displayedColumns: string[] = ['identification', 'name', 'address', 'phone'];
   //public dataSource: User[]=[];
   constructor(private userService:UserService){}
   ngOnInit(): void {
     this.getUser();
+  }
+  ngAfterViewInit(): void {
+      this.datasource.paginator = this.paginator;
   }
 
    private getUser(){
@@ -55,7 +60,6 @@ export class UserListComponent implements OnInit {
     ).subscribe(
        res=>{
         this.datasource.data = res;
-        this.totalItems=50;
         //console.log(this.dataSource);
        }
     );
@@ -63,7 +67,7 @@ export class UserListComponent implements OnInit {
   }
 
   //
-  onPageChange(event: any): void {
+ public  onPageChange(event: any): void {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
     this.getUser();
